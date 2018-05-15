@@ -12,6 +12,7 @@ const capitalize = s => s[0].toUpperCase() + s.slice(1)
 
 const minify = process.env.BUILD_MINIFY === 'true'
 const format = process.env.BUILD_FORMAT
+const exports = process.env.BUILD_EXPORTS
 const nodeEnv = process.env.NODE_ENV
 
 const esm = format === 'esm'
@@ -35,7 +36,7 @@ const config = {
     name: name,
     file: filename,
     format: esm ? 'es' : format,
-    exports: esm ? 'named' : 'auto',
+    exports: esm ? 'named' : exports,
     globals: {
       react: 'React',
     },

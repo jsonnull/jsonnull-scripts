@@ -15,6 +15,8 @@ const main = async () => {
   ]
   const input = path.join(appDirectory, 'src/index.js')
   const watch = parsedArgs.watch ? '--watch' : ''
+  const exports = args.includes('--rollup-named-exports') ? 'named' : 'auto'
+  const name = parsedArgs.name ? ['--name', parsedArgs.name] : ['']
 
   // Formats to write
   const formats = ['esm', 'cjs', 'umd', 'umd.min']
@@ -36,12 +38,13 @@ const main = async () => {
       'BUILD_ROLLUP=true',
       `BUILD_FORMAT=${formatName}`,
       `BUILD_MINIFY=${buildMinify}`,
+      `BUILD_EXPORTS=${exports}`,
       `NODE_ENV=${nodeEnv}`,
     ]
 
     const build = spawn.sync(
       crossEnv,
-      [...env, rollup, ...config, input, watch],
+      [...env, rollup, ...config, ...name, input, watch],
       {
         stdio: 'inherit',
       },
