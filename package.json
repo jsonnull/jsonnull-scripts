@@ -1,6 +1,6 @@
 {
   "name": "jsonnull-scripts",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Encapsulation of project build dependencies",
   "engines": {
     "node": ">= 8"
